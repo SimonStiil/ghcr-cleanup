@@ -1,0 +1,48 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "assignees": [
+    "SimonStiil"
+  ],
+  "reviewers": [
+    "SimonStiil"
+  ],
+  "groupName": "all dependencies",
+  "groupSlug": "all",
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "groupName": "all dependencies",
+      "groupSlug": "all",
+      "matchPackageNames": [
+        "*"
+      ]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": [
+        "mplatform/manifest-tool"
+      ],
+      "versioning": "regex:^((?<compatibility>.*)-)?v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<prerelease>[^.-]+)?$"
+    }
+  ],
+  "separateMajorMinor": false,
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/)Jenkinsfile$"
+      ],
+      "matchStrings": [
+        "\\s*image:\\s*(?<depName>.*?):(?<currentValue>.*?)\\s*#\\s*renovate\\n"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}
